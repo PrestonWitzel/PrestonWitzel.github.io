@@ -1,0 +1,54 @@
+/* Resetting some default styles */
+body, h1, ul {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif; /* You can change the font family if you prefer another one */
+    background-color: #303030; /* Dark background color */
+    color: #ffffff; /* White text color for contrast */
+    padding: 50px; /* Add some padding around the content */
+}
+
+h1 {
+    font-size: 2.5em; /* Larger font size for the header */
+    text-align: left; /* Center-align the text */
+    margin-bottom: 30px; /* Add some space below the header */
+}
+
+ul {
+    list-style-type: none; /* Remove bullet points from the list */
+    padding: 0;
+}
+
+li {
+    margin-bottom: 0px; /* Add some space between each game link */
+    padding: 10px;
+    font-size: 30px;
+    
+}
+
+a {
+    text-decoration: none; /* Remove underline from links */
+    color: #ffd900; /* Light blue color for links */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+/* Adding some hover effects for list items */
+li:hover {
+    background-color: #333333; /* Darker background color on hover */
+    padding: 8px 10px 8px 8px; /* Add padding on hover for better appearance */
+    border-radius: 10px; /* Add rounded corners */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 30px; /* Adjust padding for smaller screens */
+    }
+    
+    h1 {
+        font-size: 2em; /* Adjust font size for smaller screens */
+    }
+}

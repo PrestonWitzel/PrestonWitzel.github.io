@@ -12,4 +12,5 @@ echo.
 echo Commits pushed to repo
 pause
 start "" http://prestonwitzel.github.io
+start "" http://github.com/prestonwitzel/prestonwitzel.github.io
 exit
