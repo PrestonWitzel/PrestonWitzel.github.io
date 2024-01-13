@@ -9,7 +9,7 @@ git add .
 git commit -m %cmessage%
 git push
 echo.
-echo Commits pushed to repo
+echo Commits pushed to repo - page will not load new data because it is not built or there is cache that needs to be refreshed.
 pause
 start "" http://prestonwitzel.github.io
 start "" http://github.com/prestonwitzel/prestonwitzel.github.io
