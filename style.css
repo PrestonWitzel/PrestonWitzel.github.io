@@ -52,3 +52,20 @@ li:hover {
         font-size: 2em; /* Adjust font size for smaller screens */
     }
 }
+
+#itch-link {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 20px; /* Add space between the itch link and the header */
+    color: #ffd900; /* Light blue color for links */
+}
+
+#itch-link a {
+    text-decoration: underline;
+    color: #ffd900; /* Light blue color for links */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+#itch-link a:hover {
+    color: #333333; /* Darker color on hover */
+}
