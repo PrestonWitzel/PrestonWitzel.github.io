@@ -13,6 +13,10 @@ export default class Game {
         this.y = 0;
         this.width = 1912;
         this.height = 924;
+        this.soundCache = 0;
+        this.maxSounds = 50;
+        this.sfxVolume = 0;
+        this.musicVol = 0;
 
         this.circleSpawner = new spawner(this);
         this.circles = [];
@@ -48,6 +52,29 @@ export default class Game {
         this.particles.forEach(p => {
             p.draw(ctx);
         });
+    }
+
+    playMusic(st, vol) {
+        var audio = new Audio(`./sounds/music/${st}`);
+        if(vol + this.musicVol > 0) {
+            audio.volume = vol + this.musicVol;
+        } else {
+            audio.volume = 0
+        }
+        audio.play();
+    }
+
+    soundEffect(sfx, vol) {
+        var audio = new Audio(`./sounds/${sfx}`);
+        if(vol + this.sfxVolume > 0) {
+            audio.volume = vol + this.musicVol;
+        } else {
+            audio.volume = 0
+        }
+        audio.addEventListener('ended', () => {
+            this.soundCache--;
+        });
+        audio.play();
     }
 
 }

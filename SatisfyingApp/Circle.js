@@ -49,6 +49,10 @@ export default class Circle {
                     let p = new particle(this.game, this.x, this.y, red, green, blue);
                     this.game.particles.push(p);
                 }
+                if(this.game.soundCache < this.game.maxSounds) {
+                    this.game.soundCache++;
+                    this.game.soundEffect("pop.wav", 1);
+                }
                 
                 this.deleted = true;
             }
@@ -76,6 +80,16 @@ export default class Circle {
         let distY = this.input.mouseY - this.y;
         this.dist = Math.sqrt((distX * distX) + (distY * distY));
         if(this.dist < 150) {
+            if(!this.selected && this.game.soundCache < this.game.maxSounds) {
+                this.game.soundCache++;
+                let randNum = Math.random()*100;
+                if(randNum <= 50) {
+                    this.game.soundEffect("hover_1.mp3", 0.09);
+                } else if(randNum > 50) {
+                    this.game.soundEffect("hover_2.mp3", 0.12);
+                }
+                this.selected = true;
+            }
            
             this.color = `rgba(${255-this.dist},${150-this.dist},${this.b},0.5)`;
             ctx.arc(this.x, this.y, this.rad+((150-this.dist)/2), 0, Math.PI * 2);
