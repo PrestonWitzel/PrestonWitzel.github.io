@@ -35,9 +35,9 @@ export default class Game {
             
             let c = this.cells;
 
-            if((c[0].piece=="X" && c[4].piece=="X" && c[8].piece=="X") || (c[0].piece=="X" && c[1].piece=="X" && c[2].piece=="X") || (c[0].piece=="X" && c[3].piece=="X" && c[6].piece=="X") || (c[2].piece=="X" && c[5].piece=="X" && c[8].piece=="X") || (c[1].piece=="X" && c[4].piece=="X" && c[7].piece=="X") || (c[2].piece=="X" && c[4].piece=="X" && c[6].piece=="X") || (c[6].piece=="X" && c[7].piece=="X" && c[8].piece=="X")) {
+            if((c[0].piece=="X" && c[4].piece=="X" && c[8].piece=="X") || (c[0].piece=="X" && c[1].piece=="X" && c[2].piece=="X") || (c[0].piece=="X" && c[3].piece=="X" && c[6].piece=="X") || (c[2].piece=="X" && c[5].piece=="X" && c[8].piece=="X") || (c[1].piece=="X" && c[4].piece=="X" && c[7].piece=="X") || (c[2].piece=="X" && c[4].piece=="X" && c[6].piece=="X") || (c[6].piece=="X" && c[7].piece=="X" && c[8].piece=="X") || (c[3].piece=="X" && c[4].piece=="X" && c[5].piece=="X")) {
                 this.xWon = true;
-            } else if((c[0].piece=="O" && c[4].piece=="O" && c[8].piece=="O") || (c[0].piece=="O" && c[1].piece=="O" && c[2].piece=="O") || (c[0].piece=="O" && c[3].piece=="O" && c[6].piece=="O") || (c[2].piece=="O" && c[5].piece=="O" && c[8].piece=="O") || (c[1].piece=="O" && c[4].piece=="O" && c[7].piece=="O") || (c[2].piece=="O" && c[4].piece=="O" && c[6].piece=="O") || (c[6].piece=="O" && c[7].piece=="O" && c[8].piece=="O")) {
+            } else if((c[0].piece=="O" && c[4].piece=="O" && c[8].piece=="O") || (c[0].piece=="O" && c[1].piece=="O" && c[2].piece=="O") || (c[0].piece=="O" && c[3].piece=="O" && c[6].piece=="O") || (c[2].piece=="O" && c[5].piece=="O" && c[8].piece=="O") || (c[1].piece=="O" && c[4].piece=="O" && c[7].piece=="O") || (c[2].piece=="O" && c[4].piece=="O" && c[6].piece=="O") || (c[6].piece=="O" && c[7].piece=="O" && c[8].piece=="O") || (c[3].piece=="O" && c[4].piece=="O" && c[5].piece=="O")) {
                 this.oWon = true;
             } else {
                 if(filledCells == 9) {
@@ -56,7 +56,7 @@ export default class Game {
         if(this.xWon || this.oWon || this.tie) {
             let txt;
             if(this.xWon) {txt = "X wins!"; ctx.fillStyle = "rgb(255,0,0)"}
-            else if(this.oWon) {txt = "O wins!"; ctx.fillStyle = "rgb(0,0,255s)"}
+            else if(this.oWon) {txt = "O wins!"; ctx.fillStyle = "rgb(0,0,255)"}
             else if(this.tie) {txt = "Tie!"; ctx.fillStyle = "rgb(255,255,255)"}
             ctx.font = "Bold 60px arial"
             let text = ctx.measureText(txt);
