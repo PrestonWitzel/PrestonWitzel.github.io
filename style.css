@@ -69,3 +69,13 @@ li:hover {
 #itch-link a:hover {
     color: #333333; /* Darker color on hover */
 }
+
+#gh-link {
+    text-decoration: underline;
+    color: #ffffff; /* Light blue color for links */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+#gh-link:hover {
+    color: #333333; /* Darker color on hover */
+}
