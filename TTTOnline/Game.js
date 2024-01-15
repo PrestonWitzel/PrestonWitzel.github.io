@@ -5,8 +5,11 @@ export default class Game {
     constructor(WIDTH, HEIGHT) {
         this.screenWidth = WIDTH;
         this.screenHeight = HEIGHT;
+
+        this.isMobile = /Mobile/.test(navigator.userAgent);
+
         this.turn = 0;
-        this.input = new Inputs();
+        this.input = new Inputs(this);
         this.squareSize = 180;
         this.xWon = false; this.oWon = false; this.tie = false;
 

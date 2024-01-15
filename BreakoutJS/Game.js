@@ -12,11 +12,13 @@ export default class Game {
         this.cols = 11;
         this.bricksWidth = (1/this.cols)*(80/100)*this.screenWidth;
         this.bricksHeight = (1/this.rows)*(30/100)*this.screenHeight;
-        this.input = new Input();
+        this.input = new Input(this);
         this.paddle = new Paddle(this);
         this.score = 0;
         this.won = false;
         this.lost = false;
+
+        this.isMobile = /Mobile/.test(navigator.userAgent);
 
         this.colors = ["red", "yellow", "green"];
 

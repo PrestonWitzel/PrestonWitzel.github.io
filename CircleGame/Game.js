@@ -44,6 +44,7 @@ export default class Game {
 
         //Main game objects and parts
         this.tilemap = new TileMap(this);
+        this.largest = null;
         this.circles = []; 
         this.currentScale = 1;
         this.projectiles = [];
@@ -220,14 +221,23 @@ export default class Game {
 
         this.circles.forEach((c) => {
             c.draw(ctx);
+            if(!this.circles.indexOf(c) == 0) {
+                if(c.r > this.circles[(this.circles.indexOf(c)-1)]) {
+                    this.largest = c;
+                }
+            }
         })
         
         this.player.draw(ctx);
-       
+        if(this.player.r > this.largest.r) {
+            this.largest = this.player;
+        }
 
         this.spikes.forEach((s) => {
             s.draw(ctx);
         });
+
+        //draw king icon over 'largest's body in accordance to size, maybe even draw an arrow with the player
         
         this.leaderboard.draw(ctx);
      

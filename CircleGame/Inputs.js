@@ -16,13 +16,13 @@ export default class Inputs {
         let button = e.button;
         if (button == 0) {
           if (!this.game.player.deleted) {
-            this.player.shooting = true;
+            // this.player.shooting = true;
           }
         }
   
         if (button == 2) {
           if (!this.game.player.deleted) {
-            this.player.shooting = true;
+            // this.player.shooting = true;
           }
         }
       });
@@ -51,9 +51,9 @@ export default class Inputs {
         this.player.mouseY = e.clientY;
       });
   
-      if(this.game.isMobile) {
+      if(this.game.isMobile) { 
         let upButton = document.getElementById("up-button");
-        upButton.addEventListener("touchstart", (e) => {
+        upButton.addEventListener("touchstart", (e) => { 
           e.preventDefault();
           this.player.up = true;
         });
