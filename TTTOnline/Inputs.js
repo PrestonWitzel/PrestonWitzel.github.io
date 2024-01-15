@@ -5,27 +5,43 @@ export default class Inputs {
         this.mouseY;
         this.mouseDown;
 
-        document.addEventListener("mousemove", e => {
-            this.mouseX = e.pageX;
-            this.mouseY = e.pageY;
-        });
-
-        document.addEventListener("mousedown", e => {
-            this.mouseX = e.pageX;
-            this.mouseY = e.pageY;
-            this.mouseDown = true;
-        });
-
-        document.addEventListener("mouseup", e => {
-            this.mouseDown = false;
-        });
+        if(!this.game.isMobile) {
+            document.addEventListener("mousemove", e => {
+                this.mouseX = e.pageX;
+                this.mouseY = e.pageY;
+            });
+    
+            document.addEventListener("mousedown", e => {
+                if(e.button == 0) {
+                    
+                    if(!(this.game.xWon || this.game.oWon || this.game.tie)) {
+                        this.mouseX = e.pageX;
+                        this.mouseY = e.pageY;
+                        this.mouseDown = true;
+                    } else if(this.game.xWon || this.game.oWon || this.game.tie) {
+                        this.game.cells.forEach(c => {
+                            c.piece = "";
+                        });
+                        this.game.xWon = false;
+                        this.game.oWon = false;
+                        this.game.tie = false;
+                    } 
+                }
+            });
+    
+            document.addEventListener("mouseup", e => {
+                if(e.button == 0) {
+                    this.mouseDown = false;
+                }
+            });
+        }
+        
 
         if(this.game.isMobile) { 
             document.addEventListener("touchstart", e => { 
                 this.mouseDown = true;
                 this.mouseX = e.touches[0].clientX;
                 this.mouseY = e.touches[0].clientY;
-                console.log(e.pageX + ", " + e.pageY);
             });
 
             document.addEventListener("touchend", e => {

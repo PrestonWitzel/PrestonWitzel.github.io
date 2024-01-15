@@ -3,10 +3,14 @@ import Food from "./Food.js";
 export default class FoodSpawner {
     constructor(game) {
         this.game = game;
+        this.maxFood = null;
         if(!this.game.smallMap) {
             this.maxFood = 150;
         } else if(this.game.smallMap) {
             this.maxFood = 50;
+        }
+        if(this.game.maxFoodOverride != null) { 
+            this.maxFood = this.game.maxFoodOverride;
         }
         
         this.spawnDelay = 10000;

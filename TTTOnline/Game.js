@@ -10,7 +10,13 @@ export default class Game {
 
         this.turn = 0;
         this.input = new Inputs(this);
-        this.squareSize = 180;
+        this.squareSize = 0;
+        if(!this.isMobile) {
+            this.squareSize = 180;
+        } else if(this.isMobile) {
+            this.squareSize = 110;
+        }
+        
         this.xWon = false; this.oWon = false; this.tie = false;
 
         this.cells = [];
@@ -56,22 +62,52 @@ export default class Game {
             c.draw(ctx);
         });
 
+        let txt = "Tic-Tac-Toe";
+        ctx.fillStyle = "rgb(255,255,255)"
+        let fontSize = 70 * (this.squareSize / 180);
+        ctx.font = `Bold ${fontSize}px arial`
+        let text = ctx.measureText(txt);
+        let tWidth = text.width;
+        let tHeight = text.actualBoundingBoxAscent + text.actualBoundingBoxDescent;
+        ctx.fillText(txt, (this.screenWidth/2) - (tWidth/2), 
+        ((this.screenHeight/2) + (tHeight/2)) - (340 * (this.squareSize / 180)));
+        ctx.strokeStyle = "rgb(0,0,0)"
+        ctx.lineWidth = 4 * (this.squareSize / 180);
+        ctx.strokeText(txt, (this.screenWidth/2) - (tWidth/2), 
+        ((this.screenHeight/2) + (tHeight/2)) - (340 * (this.squareSize / 180)));
+
+
         if(this.xWon || this.oWon || this.tie) {
             let txt;
             if(this.xWon) {txt = "X wins!"; ctx.fillStyle = "rgb(255,0,0)"}
             else if(this.oWon) {txt = "O wins!"; ctx.fillStyle = "rgb(0,0,255)"}
             else if(this.tie) {txt = "Tie!"; ctx.fillStyle = "rgb(255,255,255)"}
-            ctx.font = "Bold 60px arial"
+            let fontSize = 60 * (this.squareSize / 180);
+            ctx.font = `Bold ${fontSize}px arial`
             let text = ctx.measureText(txt);
             let tWidth = text.width;
             let tHeight = text.actualBoundingBoxAscent + text.actualBoundingBoxDescent;
             ctx.fillText(txt, (this.screenWidth/2) - (tWidth/2), 
             (this.screenHeight/2) + (tHeight/2));
             ctx.strokeStyle = "rgb(0,0,0)"
-            ctx.lineWidth = 4;
+            ctx.lineWidth = 4 * (this.squareSize / 180);
             ctx.strokeText(txt, (this.screenWidth/2) - (tWidth/2), 
             (this.screenHeight/2) + (tHeight/2));
-            ctx.lineWidth = 1;
+
+            if(!this.isMobile) {
+                let txt = "Click to restart";
+                ctx.fillStyle = "rgb(255,255,255"
+                ctx.font = "Bold 20px arial"
+                ctx.lineWidth = 1;
+                let text = ctx.measureText(txt);
+                let tWidth = text.width;
+                let tHeight = text.actualBoundingBoxAscent + text.actualBoundingBoxDescent;
+                ctx.fillText(txt, (this.screenWidth/2) - (tWidth/2), 
+                ((this.screenHeight/2) + (tHeight/2)) + 45);
+                ctx.strokeText(txt, (this.screenWidth/2) - (tWidth/2), 
+                ((this.screenHeight/2) + (tHeight/2)) + 45);
+                ctx.lineWidth = 1;
+            }
         }
     }
 }

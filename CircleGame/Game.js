@@ -11,6 +11,10 @@ export default class Game {
         this.gameWidth = WIDTH;
         this.gameHeight = HEIGHT;
         this.canv = canv;
+        this.kingIcon = new Image()
+        this.kingIcon.src = "./king-icon.png";
+        this.kingIconSize = 422; 
+        this.kingIconLBSize = 422*0.15;
 
         //Mobile authenticator
         this.isMobile = /Mobile/.test(navigator.userAgent);
@@ -24,14 +28,22 @@ export default class Game {
         this.enableNames = true;
         this.playerTargettingAllowed = true;
         this.lbToggle = 1;
-        this.noLOD = false;
+        this.lowDetail = false;
         this.smallMap = false;
         this.invincible = false;
+        this.maxSpikesOverride = null;
+        this.maxCircleGuysOverride = null;
+        this.maxFoodOverride = null;
+        this.maxSpikes = null;
         this.SBAA = true;
+        this.displayCrown = false;
         if(!this.smallMap) {
             this.maxSpikes = 3;
         } else if(this.smallMap) {
             this.maxSpikes = 1;
+        }
+        if(this.maxSpikesOverride != null) { 
+            this.maxSpikes = this.maxSpikesOverride;
         }
         if(this.SBAA) {
             this.canv.getContext("2d").imageSmoothingEnabled = true;
@@ -58,6 +70,7 @@ export default class Game {
             let spike = new Spike(this);
             this.spikes.push(spike);
         }
+       
 
         
     }
@@ -75,6 +88,7 @@ export default class Game {
         this.player.accelY *= zoomFactor;
         this.player.x *= zoomFactor;
         this.player.y *= zoomFactor;
+        this.kingIconSize *= zoomFactor;
 
         let diffX = (this.gameWidth/2) - this.player.x;
         let diffY = (this.gameHeight/2) - this.player.y;
@@ -130,6 +144,7 @@ export default class Game {
         this.player.accelY *= zoomFactor;
         this.player.x *= zoomFactor;
         this.player.y *= zoomFactor;
+        this.kingIconSize *= zoomFactor;
 
         let diffX = (this.gameWidth/2) - this.player.x;
         let diffY = (this.gameHeight/2) - this.player.y;
@@ -206,7 +221,7 @@ export default class Game {
     }
 
     //Draw all of the objects
-    draw(ctx) {
+    draw(ctx) { 
 
         this.tilemap.draw(ctx);
 
@@ -221,25 +236,20 @@ export default class Game {
 
         this.circles.forEach((c) => {
             c.draw(ctx);
-            if(!this.circles.indexOf(c) == 0) {
-                if(c.r > this.circles[(this.circles.indexOf(c)-1)]) {
-                    this.largest = c;
-                }
-            }
         })
         
-        this.player.draw(ctx);
-        if(this.player.r > this.largest.r) {
-            this.largest = this.player;
-        }
+        this.player.draw(ctx); 
 
         this.spikes.forEach((s) => {
             s.draw(ctx);
         });
 
         //draw king icon over 'largest's body in accordance to size, maybe even draw an arrow with the player
-        
+        if(this.displayCrown) {
+            ctx.drawImage(this.kingIcon, (this.largest.x), (this.largest.y) - (50), this.kingIconSize * (this.largest.r*.5), this.kingIconSize * (this.largest.r*.5));
+
+        }
         this.leaderboard.draw(ctx);
-     
+        
     }
 }

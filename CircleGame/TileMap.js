@@ -50,7 +50,7 @@ export default class TileMap {
             }
         }
     
-        if(this.game.noLOD == false) {
+        if(!this.game.lowDetail) {
             if(this.size/2 > 0) {
                 this.tiles.forEach((t) => {  
                     

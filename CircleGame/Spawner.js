@@ -4,10 +4,14 @@ export default class Spawner {
     constructor(game, canv) {
         this.game = game;
         this.canv = canv;
+        this.maxCircleGuys = null;
         if(!this.game.smallMap) {
             this.maxCircleGuys = 100;
         } else if(this.game.smallMap) {
             this.maxCircleGuys = 5;
+        }
+        if(this.game.maxCircleGuysOverride != null) { 
+            this.maxCircleGuys = this.game.maxCircleGuysOverride;
         }
         
         this.spawnDelay = 10000;
