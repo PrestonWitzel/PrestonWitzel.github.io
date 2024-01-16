@@ -48,7 +48,7 @@ export default class Game {
                 this.xWon = true;
             } else if((c[0].piece=="O" && c[4].piece=="O" && c[8].piece=="O") || (c[0].piece=="O" && c[1].piece=="O" && c[2].piece=="O") || (c[0].piece=="O" && c[3].piece=="O" && c[6].piece=="O") || (c[2].piece=="O" && c[5].piece=="O" && c[8].piece=="O") || (c[1].piece=="O" && c[4].piece=="O" && c[7].piece=="O") || (c[2].piece=="O" && c[4].piece=="O" && c[6].piece=="O") || (c[6].piece=="O" && c[7].piece=="O" && c[8].piece=="O") || (c[3].piece=="O" && c[4].piece=="O" && c[5].piece=="O")) {
                 this.oWon = true;
-            } else {
+            } else if (!((c[0].piece=="O" && c[4].piece=="O" && c[8].piece=="O") || (c[0].piece=="O" && c[1].piece=="O" && c[2].piece=="O") || (c[0].piece=="O" && c[3].piece=="O" && c[6].piece=="O") || (c[2].piece=="O" && c[5].piece=="O" && c[8].piece=="O") || (c[1].piece=="O" && c[4].piece=="O" && c[7].piece=="O") || (c[2].piece=="O" && c[4].piece=="O" && c[6].piece=="O") || (c[6].piece=="O" && c[7].piece=="O" && c[8].piece=="O") || (c[3].piece=="O" && c[4].piece=="O" && c[5].piece=="O")) && !((c[0].piece=="X" && c[4].piece=="X" && c[8].piece=="X") || (c[0].piece=="X" && c[1].piece=="X" && c[2].piece=="X") || (c[0].piece=="X" && c[3].piece=="X" && c[6].piece=="X") || (c[2].piece=="X" && c[5].piece=="X" && c[8].piece=="X") || (c[1].piece=="X" && c[4].piece=="X" && c[7].piece=="X") || (c[2].piece=="X" && c[4].piece=="X" && c[6].piece=="X") || (c[6].piece=="X" && c[7].piece=="X" && c[8].piece=="X") || (c[3].piece=="X" && c[4].piece=="X" && c[5].piece=="X"))){
                 if(filledCells == 9) {
                     this.tie = true;
                 }

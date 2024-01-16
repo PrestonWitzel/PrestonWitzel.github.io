@@ -34,31 +34,41 @@ export default class Game {
     }
 
     update() { 
-        this.bricks = this.bricks.filter((b) => !b.deleted);
-        if(!this.lost && !this.won) {
-            this.ball.update();
+        if(!this.isMobile) {
+            this.bricks = this.bricks.filter((b) => !b.deleted);
+            if(!this.lost && !this.won) {
+                this.ball.update();
+            }
+            this.paddle.update();
         }
-        this.paddle.update();
     }
 
     draw(ctx) {
-        if(!this.lost && !this.won) {
-            this.ball.draw(ctx);
+        if(!this.isMobile) {
+            if(!this.lost && !this.won) {
+                this.ball.draw(ctx);
+            }
+            this.bricks.forEach((b) => {
+                b.draw(ctx);
+            });
+            this.paddle.draw(ctx);
+    
+            ctx.font = "Bold 50px arial"
+            if (this.won) { 
+                let text = ctx.measureText("You won!");
+                ctx.fillStyle = "rgb(0,0,255)"
+                ctx.fillText("You won!", (this.screenWidth/2) - (text.width/2), (this.screenHeight/2) - (40/2));
+            } else if(this.lost) { 
+                let text = ctx.measureText("Game over");
+                ctx.fillStyle = "rgb(255,0,0)"
+                ctx.fillText("Game over", (this.screenWidth/2) - (text.width/2), (this.screenHeight/2) - (40/2));
+            }
+        } else if(this.isMobile) {
+            ctx.font = "Bold 25px arial"
+            let text = ctx.measureText("Game not mobile supported :(");
+            ctx.fillStyle = "rgb(0,255,0)"
+            ctx.fillText("Game not mobile supported :(", (this.screenWidth/2) - (text.width/2), (this.screenHeight/2) - (40/2));
         }
-        this.bricks.forEach((b) => {
-            b.draw(ctx);
-        });
-        this.paddle.draw(ctx);
-
-        ctx.font = "Bold 40px serif"
-        if (this.won) { 
-            let text = ctx.measureText("You won!");
-            ctx.fillStyle = "rgb(0,0,255)"
-            ctx.fillText("You won!", (this.screenWidth/2) - (text.width/2), (this.screenHeight/2) - (40/2));
-        } else if(this.lost) { 
-            let text = ctx.measureText("Game over");
-            ctx.fillStyle = "rgb(255,0,0)"
-            ctx.fillText("Game over", (this.screenWidth/2) - (text.width/2), (this.screenHeight/2) - (40/2));
-        }
+        
     }
 }

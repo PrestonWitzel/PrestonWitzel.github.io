@@ -21,10 +21,12 @@ export default class Inputs {
                     } else if(this.game.xWon || this.game.oWon || this.game.tie) {
                         this.game.cells.forEach(c => {
                             c.piece = "";
+                            c.filled = false;
                         });
                         this.game.xWon = false;
                         this.game.oWon = false;
                         this.game.tie = false;
+                        this.game.turn = 0;
                     } 
                 }
             });

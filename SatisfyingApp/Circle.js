@@ -94,9 +94,17 @@ export default class Circle {
             this.color = `rgba(${255-this.dist},${150-this.dist},${this.b},0.5)`;
             ctx.arc(this.x, this.y, this.rad+((150-this.dist)/2), 0, Math.PI * 2);
 
-            if(this.input.mouseDown && this.dist <= this.rad+((150-this.dist)/2)) {
-                this.exploding = true;
+            if(!this.game.isMobile) {
+                if(this.input.mouseDown && this.dist <= this.rad+((150-this.dist)/2)) {
+                    this.exploding = true;
+                }
+            } else if(this.game.isMobile) {
+                if(this.game.dragger.triggerDown && this.dist <= this.rad+((150-this.dist)/2)) {
+                    this.exploding = true; 
+                    this.game.dragger.triggerDown = false;
+                }
             }
+            
             
         } else {
             this.selected = false;
