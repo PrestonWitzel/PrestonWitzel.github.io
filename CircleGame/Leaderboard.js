@@ -14,7 +14,7 @@ export default class Leaderboard {
             this.topFivePlayers.sort((a, b) => b.r - a.r);
         }
 
-        this.game.largest = this.topFivePlayers[0]; //dont forget to draw top player a crown next to him on the leaderboard
+        this.game.largest = this.topFivePlayers[0]; 
         
     }
 
@@ -34,17 +34,24 @@ export default class Leaderboard {
             
             for(let i = 0; i < 5; i++) {
                 if(i == 0) {
-                    this.topLength = ctx.measureText((i+1) + ". " + this.topFivePlayers[i].playerName + ": " + Math.floor(this.topFivePlayers[i].r/this.game.currentScale));
+                    if(this.topFivePlayers[i] == this.game.player) {
+                        this.topLength = ctx.measureText((i+1) + ". [YOU] " + this.topFivePlayers[i].playerName + ": " + Math.floor(this.topFivePlayers[i].r/this.game.currentScale));
+                    } else if(this.topFivePlayers[i] != this.game.player) {
+                        this.topLength = ctx.measureText((i+1) + ". " + this.topFivePlayers[i].playerName + ": " + Math.floor(this.topFivePlayers[i].r/this.game.currentScale));
+                    }
                 }
                 
                 try {
                     if(this.topFivePlayers[i] == this.game.player) {
-                        ctx.fillStyle = this.game.player.color;
+                        ctx.fillStyle = this.topFivePlayers[i].color;
+                        ctx.fillText((i+1) + ". [YOU] " + this.topFivePlayers[i].playerName + ": " + Math.floor(this.topFivePlayers[i].r/this.game.currentScale), 25, (i * 50) + 50);
+                    ctx.strokeText((i+1) + ". [YOU] " + this.topFivePlayers[i].playerName + ": " + Math.floor(this.topFivePlayers[i].r/this.game.currentScale), 25, (i * 50) + 50);
                     } else if(this.topFivePlayers[i] != this.game.player) {
                         ctx.fillStyle = this.topFivePlayers[i].color;
+                        ctx.fillText((i+1) + ". " + this.topFivePlayers[i].playerName + ": " + Math.floor(this.topFivePlayers[i].r/this.game.currentScale), 25, (i * 50) + 50);
+                        ctx.strokeText((i+1) + ". " + this.topFivePlayers[i].playerName + ": " + Math.floor(this.topFivePlayers[i].r/this.game.currentScale), 25, (i * 50) + 50);
                     }
-                    ctx.fillText((i+1) + ". " + this.topFivePlayers[i].playerName + ": " + Math.floor(this.topFivePlayers[i].r/this.game.currentScale), 25, (i * 50) + 50);
-                    ctx.strokeText((i+1) + ". " + this.topFivePlayers[i].playerName + ": " + Math.floor(this.topFivePlayers[i].r/this.game.currentScale), 25, (i * 50) + 50);
+                    
                 } catch (error) {
                     ctx.fillStyle = "rgb(255,255,255)";
                     
