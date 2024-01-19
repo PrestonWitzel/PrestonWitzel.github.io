@@ -29,9 +29,9 @@ export default class Inputs {
   
       document.addEventListener("wheel", (e) => {
         if (e.wheelDelta > 0) {
-          this.game.zoomin();
+          this.game.zoomIn();
         } else if (e.wheelDelta < 0) {
-          this.game.zoomout();
+          this.game.zoomOut();
         }
       });
   
@@ -67,7 +67,7 @@ export default class Inputs {
         let zoomOut = document.getElementById("zoom-out-button");
         zoomOut.addEventListener("touchstart", (e) => {
           e.preventDefault();
-          this.game.zoomout();
+          this.game.zoomOut();
         });
         zoomOut.addEventListener("touchend", (e) => {
           e.preventDefault();
@@ -77,7 +77,7 @@ export default class Inputs {
         let zoomIn = document.getElementById("zoom-in-button");
         zoomIn.addEventListener("touchstart", (e) => {
           e.preventDefault();
-          this.game.zoomin();
+          this.game.zoomIn();
         });
         zoomIn.addEventListener("touchend", (e) => {
           e.preventDefault();
@@ -141,6 +141,12 @@ export default class Inputs {
       }
       if (key == "d") {
         this.player.right = isPressed;
+      }
+      if(key == "i" && isPressed) {
+        this.game.zoomIn();
+      }
+      if(key == "o" && isPressed) {
+        this.game.zoomOut();
       }
     }
   }

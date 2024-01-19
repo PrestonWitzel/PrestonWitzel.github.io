@@ -7,7 +7,7 @@ import Spike from "./Spike.js";
 
 export default class Game {
     constructor(WIDTH, HEIGHT, canv) {
-        //Game setting
+        //Game setting and vars
         this.gameWidth = WIDTH;
         this.gameHeight = HEIGHT;
         this.canv = canv;
@@ -15,6 +15,9 @@ export default class Game {
         this.kingIcon.src = "./king-icon.png";
         this.kingIconSize = 422; 
         this.kingIconLBSize = 422*0.15;
+        this.lbToggle = 1; 
+        this.groundFriction = 0.88; 
+        this.currentScale = 1;
 
         //Mobile authenticator
         this.isMobile = /Mobile/.test(navigator.userAgent);
@@ -22,25 +25,24 @@ export default class Game {
             document.getElementById("touch-controls").style.display = "none";
         }
 
-        //Experimental values
-        this.groundFriction = 0.88;
-        this.debugMode = false;
-        this.enableNames = true;
-        this.playerTargettingAllowed = true;
-        this.lbToggle = 1;
-        this.lowDetail = false;
-        this.smallMap = false;
-        this.invincible = false;
-        this.maxSpikesOverride = null;
-        this.maxCircleGuysOverride = null;
-        this.maxFoodOverride = null;
-        this.maxSpikes = null;
-        this.SBAA = true;
-        this.displayCrown = false;
+        //Experimental values 
+        
+        this.debugMode = false; //Debug stuff
+        this.enableNames = true; //Show names on circles or not
+        this.playerTargettingAllowed = true; //When false, player can not be targetted
+        this.lowDetail = false; //Takes away the lines from the map, more will come soon
+        this.smallMap = true; //A small map that by default, sets the number of certain things lower
+        this.invincible = false; //player is not killable, but still targeted and can gain size
+        this.maxSpikesOverride = null; //If set to a number instead of null, the game doesnt decide for itself
+        this.maxCircleGuysOverride = null; //If set to a number instead of null, the game doesnt decide for itself
+        this.maxFoodOverride = null; //If set to a number instead of null, the game doesnt decide for itself
+        this.maxSpikes = null; //If set to a number instead of null, the game doesnt decide for itself
+        this.SBAA = true; //Anti aliasing ig
+        this.displayCrown = false; //Not ready
         if(!this.smallMap) {
-            this.maxSpikes = 3;
+            this.maxSpikes = 6;
         } else if(this.smallMap) {
-            this.maxSpikes = 1;
+            this.maxSpikes = 3;
         }
         if(this.maxSpikesOverride != null) { 
             this.maxSpikes = this.maxSpikesOverride;
@@ -54,11 +56,10 @@ export default class Game {
         this.playerNames = ["Blaze Lightning",  "Spike Fury",  "Mystic Shadow",  "Nitro Blaze",  "Max Thunder",  "Ruby Storm",  "Ace Nova",  "Luna Vortex",  "Onyx Inferno",  "Aurora Borealis",  "Phoenix Blaze",  "Viper Venom",  "Jupiter Fury",  "Mars Fireball",  "Neptune Wave",  "Saturn Rings",  "Mercury Swift",  "Pluto Ice",  "Galaxy Blast",  "Cosmo Rocket",  "Comet Crash",  "Nebula Nova",  "Solar Flare",  "Lunar Eclipse",  "Meteor Strike",  "Starlight Shadow",  "Supernova",  "Black Hole",  "Celestial Storm",  "Dragon Blaze",  "Thunderbolt",  "Storm Surge",  "Earthquake",  "Typhoon",  "Tsunami",  "Avalanche",  "Volcano",  "Hurricane",  "Tornado",  "Sandstorm",  "Wildfire",  "Blizzard",  "Cyclone",  "Hailstorm",  "Heatwave",  "Iceberg",  "Lightning Bolt",  "Magma",  "Quicksilver",  "Rainbow",  "Sapphire",  "Emerald",  "Ruby",  "Diamond",  "Topaz",  "Amber",  "Opal",  "Pearl",  "Sapphire",  "Aquamarine",  "Garnet",  "Jade",  "Lapis Lazuli",  "Moonstone",  "Turquoise",  "Sunstone",  "Bloodstone",  "Citrine",  "Peridot",  "Rose Quartz",  "Smoky Quartz",  "Zircon",  "Beryl",  "Alexandrite",  "Andalusite",  "Kunzite",  "Morganite",  "Rhodochrosite",  "Rhodonite",  "Spinel",  "Tanzanite",  "Tourmaline",  "Frost Nova",  "Eclipse",  "Shadow Strike",  "Blaze Wave",  "Phoenix Storm",  "Dragon Fire",  "Thunder Fury",  "Magma Blast",  "Ice Storm",  "Crystal Shard",  "Rising Sun",  "Nightfall",  "Solar Eclipse",  "Galactic Pulse",  "Cosmic Ray",  "Aurora Beam",  "Plasma Blast",  "Gravity Surge",  "Dimension Shift",  "Time Warp"];
         
 
-        //Main game objects and parts
+        //Main game objects and parts and vars
         this.tilemap = new TileMap(this);
         this.largest = null;
         this.circles = []; 
-        this.currentScale = 1;
         this.projectiles = [];
         this.food = [];
         this.player = new Player(this);
@@ -70,13 +71,11 @@ export default class Game {
             let spike = new Spike(this);
             this.spikes.push(spike);
         }
-       
 
-        
     }
 
     //Zooming in and out functions
-    zoomin() {
+    zoomIn() {
         let zScale = 0.1;
         let zoomFactor = 1.1;
         
@@ -132,7 +131,7 @@ export default class Game {
 
     }
 
-    zoomout() {
+    zoomOut() {
         let zScale = 0.1;
         let zoomFactor = 0.9;
         this.currentScale *= zoomFactor;

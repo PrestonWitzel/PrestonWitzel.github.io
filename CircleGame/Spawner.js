@@ -6,9 +6,9 @@ export default class Spawner {
         this.canv = canv;
         this.maxCircleGuys = null;
         if(!this.game.smallMap) {
-            this.maxCircleGuys = 100;
+            this.maxCircleGuys = 199;
         } else if(this.game.smallMap) {
-            this.maxCircleGuys = 5;
+            this.maxCircleGuys = 99;
         }
         if(this.game.maxCircleGuysOverride != null) { 
             this.maxCircleGuys = this.game.maxCircleGuysOverride;

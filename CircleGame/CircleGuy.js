@@ -183,18 +183,20 @@ export default class CircleGuy {
             let UbuntuB = new FontFace('UbuntuB', 'url(Ubuntu-Bold.ttf)');
             UbuntuB.load();
             ctx.fillStyle = this.color;
-            ctx.strokeStyle = "rgb(0,0,0)";
-            ctx.lineWidth = 0.025 * this.r;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.r, 0, Math.PI*2, false);
             ctx.fill();
-            ctx.stroke();
+            if((0.025 * this.r) * this.game.currentScale) {
+                ctx.strokeStyle = "rgb(0,0,0)";
+                ctx.lineWidth = (0.025 * this.r) * this.game.currentScale;
+                ctx.stroke();
+            }
+            
 
             if(this.game.debugMode) {
-                if(this.target != null) {
-            
+                if(this.target != null && this.game.currentScale > 0) {
                     ctx.strokeStyle = this.color;
-                    ctx.lineWidth = 1;
+                    ctx.lineWidth = 3 * this.game.currentScale;
                     ctx.beginPath();
                     ctx.moveTo(this.x, this.y);
                     ctx.lineTo(this.target.x, this.target.y);

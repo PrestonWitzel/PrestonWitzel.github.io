@@ -5,9 +5,9 @@ export default class FoodSpawner {
         this.game = game;
         this.maxFood = null;
         if(!this.game.smallMap) {
-            this.maxFood = 150;
+            this.maxFood = 300;
         } else if(this.game.smallMap) {
-            this.maxFood = 50;
+            this.maxFood = 150;
         }
         if(this.game.maxFoodOverride != null) { 
             this.maxFood = this.game.maxFoodOverride;

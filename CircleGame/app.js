@@ -5,6 +5,7 @@ let canv = document.querySelector("canvas");
 let ctx = canv.getContext("2d");
 const WIDTH = (canv.width = window.innerWidth);
 const HEIGHT = (canv.height = window.innerHeight);
+var x = 0;
 
 
 //Set up the game
@@ -23,5 +24,3 @@ function gameLoop() {
 }
 
 gameLoop();
-
-//Made by preston allen

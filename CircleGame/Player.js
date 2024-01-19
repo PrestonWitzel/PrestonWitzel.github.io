@@ -5,8 +5,8 @@ export default class Player {
     constructor(game) {
         this.game = game;
 
-        let x = Math.floor(Math.random()*this.game.playerNames.length);
-        this.playerName = this.game.playerNames[x]; 
+        let rName = Math.floor(Math.random()*this.game.playerNames.length);
+        this.playerName = this.game.playerNames[rName]; 
         this.size = (Math.random() * (170 - 160) + 160) * this.game.currentScale;
         this.r = this.size / 2;
         this.x = this.game.gameWidth /2;
@@ -174,11 +174,13 @@ export default class Player {
           UbuntuB.load();
           ctx.fillStyle = this.color;
           ctx.strokeStyle = "rgb(0,0,0)";
-          ctx.lineWidth = 0.025 * this.r;
           ctx.beginPath();
           ctx.arc(this.x, this.y, this.r, 0, Math.PI*2, false);
           ctx.fill();
-          ctx.stroke();
+          if((0.025 * this.r) * this.game.currentScale > 0) {
+            ctx.lineWidth = (0.025 * this.r) * this.game.currentScale;
+            ctx.stroke();
+          }
 
           if(this.game.enableNames) {
             ctx.fillStyle = "rgb(255,255,255)";
@@ -219,8 +221,8 @@ export default class Player {
           
         ctx.font = "15px Arial";
         ctx.fillStyle = "rgba(255, 255, 255)";
-        ctx.fillText("x: " + this.mouseX, this.mouseX + 15, this.mouseY);
-        ctx.fillText("y: " + this.mouseY, this.mouseX + 15, this.mouseY + 15);
+        ctx.fillText("world x: " + ((this.mouseX - this.x) - (Math.floor(this.game.tilemap.x - this.x))), this.mouseX + 15, this.mouseY);
+        ctx.fillText("world y: " + ((this.mouseY - this.y) - (Math.floor(this.game.tilemap.y - this.y))), this.mouseX + 15, this.mouseY + 15);
       }
     }
 }
